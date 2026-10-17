@@ -404,6 +404,9 @@ Scope {
         function activateStatic(): void {
             root.lockStatic();
         }
+        function restartAuth(): void {
+            if (rootLock.locked) root.restartAuth();
+        }
     }
 
 

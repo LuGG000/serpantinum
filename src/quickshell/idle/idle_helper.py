@@ -294,9 +294,11 @@ class SleepLock:
         if msg.body[0]:
             print("sleep", flush=True)
             self.release_at = time.monotonic() + LOCK_WAIT
-        elif self.inhibitor is None:
-            self.release_at = None
-            self.inhibitor = self.take_inhibitor()
+        else:
+            print("wake", flush=True)
+            if self.inhibitor is None:
+                self.release_at = None
+                self.inhibitor = self.take_inhibitor()
 
     def pump(self):
         if self.conn is None:
